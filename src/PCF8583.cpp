@@ -63,7 +63,7 @@ unsigned long PCF8583::getCount()
     count = bcd2byte(Wire.read());
     count = count + bcd2byte(Wire.read()) * 100L;
     count = count + bcd2byte(Wire.read()) * 10000L;
-
+    lastRain = millis();
     return count;
 }
 

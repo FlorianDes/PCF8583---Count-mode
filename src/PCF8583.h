@@ -13,6 +13,7 @@ class PCF8583
 {
 public:
     PCF8583(){};
+    uint32_t lastRain = millis();
     bool begin(uint8_t addr, TwoWire *thewire = &Wire);
     void setMode(uint8_t mode);
     uint8_t getMode();
