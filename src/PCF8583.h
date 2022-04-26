@@ -13,17 +13,19 @@ class PCF8583
 {
 public:
     PCF8583(){};
-    uint32_t lastRain = millis();
+
     bool begin(uint8_t addr, TwoWire *thewire = &Wire);
     void setMode(uint8_t mode);
     uint8_t getMode();
 
     bool setCount(unsigned long count);
     unsigned long getCount();
+    uint32_t getLastSetCount();
 
 private:
     uint8_t _address;
     TwoWire *_wire;
+    uint32_t lastSetCount;
     uint8_t read(uint8_t reg);
     bool write(uint8_t reg, uint8_t value);
     uint8_t bcd2byte(uint8_t value);

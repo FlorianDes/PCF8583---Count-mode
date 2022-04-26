@@ -24,7 +24,13 @@ bool PCF8583::setCount(unsigned long count)
     Wire.write(byte2bcd((count / 10000) % 100));
     status = Wire.endTransmission();
     start();
+    lastSetCount = millis();
     return status == 0;
+}
+
+uint32_t PCF8583::getLastSetCount()
+{
+    return lastSetCount;
 }
 
 void PCF8583::setMode(uint8_t mode)
@@ -63,7 +69,6 @@ unsigned long PCF8583::getCount()
     count = bcd2byte(Wire.read());
     count = count + bcd2byte(Wire.read()) * 100L;
     count = count + bcd2byte(Wire.read()) * 10000L;
-    lastRain = millis();
     return count;
 }
 
